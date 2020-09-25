@@ -8,13 +8,17 @@ from utils import meval
 
 from telethon import TelegramClient, events
 from telethon.events import NewMessage, MessageEdited
-from telethon.errors import AttributeError, MessageTooLongError
+from telethon.errors import MessageTooLongError
 
-client = TelegramClient(session, api_id, api_hash)
+APP_ID = 12345
+APP_HASH = "abcd123"
+
+
+client = TelegramClient('bot', api_id=APP_ID, api_hash=APP_HASH)
 
 @client.on(events.NewMessage(outgoing=True, pattern=r"(\,x\s).+"))
 @client.on(events.MessageEdited(outgoing=True, pattern=r"(\,x\s).+"))
-async def eval(event: Message):
+async def eval(event):
     client = event.client
     message = event.message
     cmd = event.pattern_match.group(1)
