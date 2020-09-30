@@ -6,7 +6,7 @@ async def meval(code, local_vars):
     locs = {}
     globs = globals().copy()
     global_args = "_globs"
-    while global_args in globs.keys():
+    while global_args in globs:
         global_args = "_" + global_args
     local_vars[global_args] = {}
     for glob in ["__name__", "__package__"]:
